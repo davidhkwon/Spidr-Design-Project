@@ -4,8 +4,6 @@ import countryData from 'country-telephone-data';
 import validator from 'validator';
 import 'react-phone-number-input/style.css';
 import './App.css';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 
 function App() {
   const countryOptions = countryData.allCountries.map((country) => {
