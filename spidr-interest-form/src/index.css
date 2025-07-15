@@ -1,0 +1,24 @@
+:root, body {
+  font-family: 'Raleway', sans-serif !important;
+  color: #fff;
+  background-color: #252627;
+  line-height: 1.3;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #fff !important;
+  color: #fff;
+  border-radius: 0 !important;
+  transition: background 0.25s, border-color 0.25s;
+}
+button:hover, button:focus {
+  background: rgba(0,0,0,0.6);
+  border-color: #56acbd !important;
+  color: #56acbd;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200 !important;
+  color: #fff;
+}
