@@ -37,9 +37,6 @@ function App() {
       return;
     }
 
-    // For basic inputs
-    const { name, value } = eOrValue.target;
-
     if (name === 'pin') {
       let digits = value.replace(/\D/g, '').slice(0, 16);
       let formatted = '';
@@ -55,11 +52,16 @@ function App() {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+
+    // For basic inputs
+    const { name, value } = eOrValue.target;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = {};
+    
+    // First Name
     if (!formData.firstName) errors.firstName = 'First name is required.';
     if (!formData.lastName) errors.lastName = 'Last name is required.';
     if (!formData.countryCode) errors.phone = 'Country code is required.';
@@ -94,48 +96,89 @@ function App() {
   return (
     <>
       <h1 className="form-title">Spidr Interest Form</h1>
-      
-      <p className="required-note">* Required Field</p>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name <span style={{ color: '#fff' }}>*</span></label>
-          <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
-          {formErrors.firstName && <div className="error-message">{formErrors.firstName}</div>}
+      <div className="split-container">
+        <div className="split-left">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div>
-          <label>Last Name <span style={{ color: '#fff' }}>*</span></label>
-          <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
-          {formErrors.lastName && <div className="error-message">{formErrors.lastName}</div>}
-        </div>
-        <div>
-          <label>Phone Number <span style={{ color: '#fff' }}>*</span></label>
-          <div>
+        <div className="split-right">
+          <p className="required-note">* Required Field</p>
+          <form onSubmit={handleSubmit}>
             <div>
-              <Select options={countryOptions} value={formData.countryCode} onChange={(option) => handleChange(option, { name: 'countryCode' })} isSearchable
+              <label>First Name <span style={{ color: '#fff' }}>*</span></label>
+              <input type="text"
+                     name="firstName"
+                     value={formData.firstName}
+                     onChange={handleChange}
               />
+              {formErrors.firstName && <div className="error-message">{formErrors.firstName}</div>}
             </div>
-            <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
-          </div>
-          {formErrors.phone && <div className="error-message">{formErrors.phone}</div>}
+            <div>
+              <label>Last Name <span style={{ color: '#fff' }}>*</span></label>
+              <input type="text"
+                     name="lastName"
+                     value={formData.lastName}
+                     onChange={handleChange}
+              />
+              {formErrors.lastName && <div className="error-message">{formErrors.lastName}</div>}
+            </div>
+            <div>
+              <label>Phone Number <span style={{ color: '#fff' }}>*</span></label>
+              <div className="phone-row">
+                <div className="country-select">
+                  <Select options={countryOptions} 
+                          value={formData.countryCode} 
+                          onChange={(option) => handleChange(option, { name: 'countryCode' })} 
+                          isSearchable
+                          styles={{
+                            control: (provided) => ({ ...provided, color: 'black' }),
+                            singleValue: (provided) => ({ ...provided, color: 'black' }),
+                            input: (provided) => ({ ...provided, color: 'black' }),
+                            option: (provided, state) => ({ ...provided, color: 'black' }),
+                          }}
+                    />
+                </div>
+                <input type="text"
+                       name="phone"
+                       value={formData.phone}
+                       onChange={handleChange}
+                       className="phone-input"
+                />
+              </div>
+              {formErrors.phone && <div className="error-message">{formErrors.phone}</div>}
+            </div>
+            <div>
+              <label>Email Address <span style={{ color: '#fff' }}>*</span></label>
+              <input type="text"
+                     name="email"
+                     value={formData.email}
+                     onChange={handleChange} 
+              />
+              {formErrors.email && <div className="error-message">{formErrors.email}</div>}
+            </div>
+            <div>
+              <label>Guess the air fryer’s cost (in USD) <span style={{ color: '#fff' }}>*</span></label>
+              <input type="text"
+                     inputMode="numeric"
+                     name="guess" value={formData.guess}
+                     onChange={handleChange} 
+              />
+              {formErrors.guess && <div className="error-message">{formErrors.guess}</div>}
+            </div>
+            <div>
+              <label>Spidr PIN <span style={{ color: '#fff' }}>*</span></label>
+              <input type="text"
+                     inputMode="numeric"
+                     name="pin"
+                     placeholder="####-####-####-####"
+                     maxLength={19} value={formData.pin}
+                     onChange={handleChange} 
+              />
+              {formErrors.pin && <div className="error-message">{formErrors.pin}</div>}
+            </div>
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <div>
-          <label>Email Address <span style={{ color: '#fff' }}>*</span></label>
-          <input type="text" name="email" value={formData.email} onChange={handleChange} />
-          {formErrors.email && <div className="error-message">{formErrors.email}</div>}
-        </div>
-        <div>
-          <label>Guess the air fryer’s cost (in USD) <span style={{ color: '#fff' }}>*</span></label>
-          <input type="text" inputMode="numeric" name="guess" value={formData.guess} onChange={handleChange} />
-          {formErrors.guess && <div className="error-message">{formErrors.guess}</div>}
-        </div>
-        <div>
-          <label>Spidr PIN <span style={{ color: '#fff' }}>*</span></label>
-          <input type="text" inputMode="numeric" name="pin" placeholder="####-####-####-####" maxLength={19} value={formData.pin} onChange={handleChange} />
-          {formErrors.pin && <div className="error-message">{formErrors.pin}</div>}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      </div>
     </>
   );
 }

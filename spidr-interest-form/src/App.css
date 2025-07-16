@@ -1,0 +1,115 @@
+/* Layout & Containers */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.split-container {
+  display: flex;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 2em;
+  align-items: flex-start;
+}
+
+.split-left, .split-right {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.split-left {
+  background: rgba(86, 172, 189, 0.08);
+  padding: 2em 1.5em;
+  border-radius: 8px;
+}
+
+.split-right {}
+
+/* Typography & Messages */
+.confirmation {
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+  margin: 2em 0;
+  font-size: 1.2em;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95em;
+  margin-top: 0.25em;
+  margin-bottom: 0.5em;
+  font-style: italic;
+  display: block;
+}
+
+.form-title {
+  text-align: center;
+}
+
+/* Form Styles */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.3em;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  align-self: center;
+  margin-top: 1em;
+  padding: 0.6em 1.5em;
+  font-size: 1em;
+}
+
+/* Form Layout Utilities */
+.required-note {
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto 1em auto;
+}
+
+.phone-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.7em;
+  width: 100%;
+}
+
+.country-select {
+  min-width: 160px;
+  flex: 0 0 160px;
+}
+
+.phone-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
