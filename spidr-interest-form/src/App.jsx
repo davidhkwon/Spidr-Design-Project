@@ -28,14 +28,22 @@ function App() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [formHistory, setFormHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   // Handle input changes
   const handleChange = (eOrValue, meta) => {
     if (meta && meta.name === 'countryCode') {
+      // Save current state to history before updating
+      setFormHistory(prev => [...prev.slice(0, historyIndex + 1), formData]);
+      setHistoryIndex(prev => prev + 1);
       setFormData((prev) => ({ ...prev, countryCode: eOrValue }));
       return;
     }
+    
     const { name, value } = eOrValue.target;
+    let newValue;
+    
     if (name === 'pin') {
       // Format PIN as ####-####-####-####
       let digits = value.replace(/\D/g, '').slice(0, 16);
@@ -44,11 +52,28 @@ function App() {
         if (i > 0) formatted += '-';
         formatted += digits.slice(i, i + 4);
       }
-      setFormData((prev) => ({ ...prev, [name]: formatted }));
+      newValue = formatted;
     } else if (name === 'guess' || name === 'phone') {
-      setFormData((prev) => ({ ...prev, [name]: value.replace(/\D/g, '') }));
+      newValue = value.replace(/\D/g, '');
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      // Remove leading spaces from text inputs
+      newValue = value.replace(/^\s+/, '');
+    }
+    
+    // Save current state to history before updating
+    setFormHistory(prev => [...prev.slice(0, historyIndex + 1), formData]);
+    setHistoryIndex(prev => prev + 1);
+    setFormData((prev) => ({ ...prev, [name]: newValue }));
+  };
+
+  // Handle undo (Ctrl+Z)
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        setHistoryIndex(prev => prev - 1);
+        setFormData(formHistory[historyIndex - 1]);
+      }
     }
   };
 
@@ -93,7 +118,7 @@ function App() {
         </div>
         <div className="split-right">
           <p className="required-note">* Required Field</p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
             <div>
               <label>First Name <span style={{ color: '#fff' }}>*</span></label>
               <input type="text"
@@ -124,7 +149,17 @@ function App() {
                           control: (provided) => ({ ...provided, color: 'black', minWidth: '0', fontSize: '0.9em' }),
                           singleValue: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
                           input: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
-                          option: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
+                          option: (provided, state) => ({ 
+                            ...provided, 
+                            color: 'black', 
+                            fontSize: '0.9em',
+                            backgroundColor: state.isFocused ? '#56acbd' : state.isSelected ? '#56acbd' : 'white',
+                            color: state.isFocused || state.isSelected ? 'white' : 'black',
+                            '&:hover': {
+                              backgroundColor: '#56acbd',
+                              color: 'white'
+                            }
+                          }),
                         }}
                 />
               </div>
