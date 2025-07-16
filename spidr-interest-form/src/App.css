@@ -41,7 +41,7 @@
   font-family: 'Raleway', sans-serif;
   font-size: 0.95em;
   margin-top: 0.25em;
-  margin-bottom: 0.5em;
+  margin-bottom: -0.25em;
   font-style: italic;
   display: block;
 }
@@ -105,11 +105,17 @@ button[type="submit"] {
 }
 
 .country-select {
-  min-width: 160px;
-  flex: 0 0 160px;
+  min-width: 48.5%;
 }
 
 .phone-input {
   flex: 1 1 auto;
-  min-width: 0;
+}
+
+.footer-copyright {
+  text-align: center;
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }

@@ -37,6 +37,9 @@ function App() {
       return;
     }
 
+    // For basic inputs
+    const { name, value } = eOrValue.target;
+
     if (name === 'pin') {
       let digits = value.replace(/\D/g, '').slice(0, 16);
       let formatted = '';
@@ -52,9 +55,6 @@ function App() {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
-
-    // For basic inputs
-    const { name, value } = eOrValue.target;
   };
 
   const handleSubmit = (e) => {
@@ -179,6 +179,9 @@ function App() {
           </form>
         </div>
       </div>
+      <footer className="footer-copyright">
+        © Copyright 2002 - 2025 Spider Design, Inc
+      </footer>
     </>
   );
 }
