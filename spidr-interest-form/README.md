@@ -1,12 +1,21 @@
-# React + Vite
+# Spidr Design Interest Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application for collecting user interest in Spidr Design's new air fryer
 
-Currently, two official plugins are available:
+## Technology
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19.1.0
+- Vite
+- React Select for country dropdown
+- Validator.js for form validation
+- CSS styling
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Install dependencies: `npm install`
+2. Start development server: `npm run dev`
+3. Build for production: `npm run build`
+
+---
+
+Built for Spidr Design challenge submission.
