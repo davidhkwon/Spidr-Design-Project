@@ -2,12 +2,11 @@ import { useState } from 'react';
 import Select from 'react-select';
 import countryData from 'country-telephone-data';
 import validator from 'validator';
-import 'react-phone-number-input/style.css';
 import './App.css';
 
 function App() {
+  // Prepare country options for the select dropdown
   const countryOptions = countryData.allCountries.map((country) => {
-    // Remove anything in parentheses from the country name
     const englishName = country.name.replace(/\s*\(.*\)\s*/, '');
     return {
       value: country.dialCode,
@@ -15,10 +14,9 @@ function App() {
     };
   });
 
-  const defaultCountry = countryOptions.find(
-    c => c.label.startsWith('United States')
-  );
+  const defaultCountry = countryOptions.find(c => c.label.startsWith('United States'));
 
+  // State management
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -31,16 +29,15 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
+  // Handle input changes
   const handleChange = (eOrValue, meta) => {
     if (meta && meta.name === 'countryCode') {
       setFormData((prev) => ({ ...prev, countryCode: eOrValue }));
       return;
     }
-
-    // For basic inputs
     const { name, value } = eOrValue.target;
-
     if (name === 'pin') {
+      // Format PIN as ####-####-####-####
       let digits = value.replace(/\D/g, '').slice(0, 16);
       let formatted = '';
       for (let i = 0; i < digits.length; i += 4) {
@@ -48,28 +45,23 @@ function App() {
         formatted += digits.slice(i, i + 4);
       }
       setFormData((prev) => ({ ...prev, [name]: formatted }));
-    } else if (name === 'guess') {
-      setFormData((prev) => ({ ...prev, [name]: value.replace(/\D/g, '') }));
-    } else if (name === 'phone') {
+    } else if (name === 'guess' || name === 'phone') {
       setFormData((prev) => ({ ...prev, [name]: value.replace(/\D/g, '') }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
+  // Validate and submit the form
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = {};
-    
-    // First Name
     if (!formData.firstName) errors.firstName = 'First name is required.';
     if (!formData.lastName) errors.lastName = 'Last name is required.';
     if (!formData.countryCode) errors.phone = 'Country code is required.';
     if (!formData.phone) errors.phone = 'Phone number is required.';
     else {
-      // Combine country code and phone for validation
       const fullPhone = `+${formData.countryCode.value}${formData.phone}`;
-      // Use validator to check if it's a valid phone number
       if (!validator.isMobilePhone(fullPhone, undefined, { strictMode: false })) {
         errors.phone = 'Please enter a valid phone number.';
       }
@@ -84,7 +76,6 @@ function App() {
     }
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-      console.log('Form submitted:', formData);
       setSubmitted(true);
     }
   };
@@ -123,27 +114,27 @@ function App() {
             </div>
             <div>
               <label>Phone Number <span style={{ color: '#fff' }}>*</span></label>
-              <div className="phone-row">
-                <div className="country-select">
-                  <Select options={countryOptions} 
-                          value={formData.countryCode} 
-                          onChange={(option) => handleChange(option, { name: 'countryCode' })} 
-                          isSearchable
-                          styles={{
-                            control: (provided) => ({ ...provided, color: 'black' }),
-                            singleValue: (provided) => ({ ...provided, color: 'black' }),
-                            input: (provided) => ({ ...provided, color: 'black' }),
-                            option: (provided, state) => ({ ...provided, color: 'black' }),
-                          }}
-                    />
-                </div>
-                <input type="text"
-                       name="phone"
-                       value={formData.phone}
-                       onChange={handleChange}
-                       className="phone-input"
+              <div className="country-select">
+                <Select options={countryOptions} 
+                        value={formData.countryCode} 
+                        onChange={(option) => handleChange(option, { name: 'countryCode' })} 
+                        isSearchable
+                        styles={{
+                          container: (provided) => ({ ...provided }),
+                          control: (provided) => ({ ...provided, color: 'black', minWidth: '0', fontSize: '0.9em' }),
+                          singleValue: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
+                          input: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
+                          option: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
+                        }}
                 />
               </div>
+              <input type="text"
+                     name="phone"
+                     value={formData.phone}
+                     onChange={handleChange}
+                     className="phone-input"
+                     style={{ marginTop: '8px' }}
+              />
               {formErrors.phone && <div className="error-message">{formErrors.phone}</div>}
             </div>
             <div>
@@ -182,4 +173,5 @@ function App() {
     </>
   );
 }
+
 export default App;

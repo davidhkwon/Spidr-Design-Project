@@ -1,29 +1,12 @@
-html, body {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: 0;
-  min-height: 100vh;
-  padding: 0;
-}
-
-#root {
-  flex: 1;
-  margin: 0 auto;
-  max-width: 1280px;
-  min-height: 100%;
-  padding: 2rem;
-  position: relative;
-  text-align: center;
-}
-
-/* 2. Layout & Containers */
+/* Layout Components */
 .split-container {
-  align-items: flex-start;
   display: flex;
+  align-items: flex-start;
   gap: 2em;
-  margin: 0 auto;
+  margin: 0 auto 0.75em auto;
   max-width: 900px;
+  position: relative;
+  z-index: 2;
 }
 
 .split-left, .split-right {
@@ -33,13 +16,29 @@ html, body {
 
 .split-left {
   background: #56acbd;
-  border-radius: 8px;
   padding: 2em 1.5em;
 }
 
-.split-right {}
+/* Form Title Component */
+.form-title {
+  text-align: center;
+  margin: -5px 0 0.75em 0;
+  position: relative;
+  font-weight: 200 !important;
+  z-index: 2;
+}
 
-/* 3. Form Styles */
+.form-title::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 2px;
+  margin: 10px auto 25px auto;
+  background: #56acbd;
+  border-radius: 2px;
+}
+
+/* Form Components */
 form {
   display: flex;
   flex-direction: column;
@@ -50,13 +49,14 @@ form {
 }
 
 form > div {
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 label {
   font-weight: 500;
+  font-size: 0.9em;
   margin-bottom: 0.3em;
   text-align: left;
 }
@@ -64,21 +64,23 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="number"] {
+  width: 100%;
+  padding: 0.5em;
+  font-size: 0.9em;
+  color: #333;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 1em;
-  padding: 0.5em;
-  width: 100%;
 }
 
 button[type="submit"] {
   align-self: center;
-  font-size: 1em;
   margin-top: 1em;
   padding: 0.6em 1.5em;
+  font-size: 1em;
 }
 
+/* Form Helper Components */
 .required-note {
   margin: 0 auto 1em auto;
   max-width: 400px;
@@ -87,27 +89,23 @@ button[type="submit"] {
 
 .phone-row {
   display: flex;
-  flex-direction: row;
-  gap: 0.7em;
-  width: 100%;
+  flex-direction: column;
+  gap: 0;
 }
 
 .country-select {
-  min-width: 48.5%;
+  width: 100%;
+  min-width: 0;
 }
 
 .phone-input {
+  width: 100%;
   flex: 1 1 auto;
 }
 
-/* 4. Typography & Messages */
-.form-title {
-  text-align: center;
-}
-
+/* Message Components */
 .confirmation {
   color: #fff;
-  font-family: 'Raleway', sans-serif;
   font-size: 1.2em;
   font-weight: 600;
   margin: 2em 0;
@@ -116,32 +114,6 @@ button[type="submit"] {
 .error-message {
   color: #ff4d4f;
   font-size: 0.9em;
-  margin-bottom: -5px;
   margin-top: 5px;
-}
-
-/* 5. Footer */
-.footer-copyright {
-  color: #888;
-  font-size: 0.9em;
-  margin-bottom: 2em;
-  margin-top: 1em;
-  text-align: center;
-}
-
-/* 6. Overlay & Z-Index */
-.background-overlay {
-  background: #333;
-  height: 110%;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-#root, .split-container, .form-title, .footer-copyright {
-  position: relative;
-  z-index: 2;
+  margin-bottom: -5px;
 }

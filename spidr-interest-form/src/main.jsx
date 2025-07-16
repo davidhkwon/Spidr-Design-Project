@@ -8,3 +8,8 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
+
+const footer = document.createElement('div');
+footer.className = 'footer';
+footer.innerHTML = '© Copyright 2002 - 2025 Spider Design, Inc';
+document.body.appendChild(footer);
