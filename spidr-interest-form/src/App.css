@@ -105,10 +105,13 @@ button[type="submit"] {
 
 /* Message Components */
 .confirmation {
+  text-align: center;
+  margin: 25px 0 0.75em 0;
+  position: relative;
+  font-weight: 200 !important;
+  z-index: 2;
   color: #fff;
-  font-size: 1.2em;
-  font-weight: 600;
-  margin: 2em 0;
+  font-size: 1.5em;
 }
 
 .error-message {
