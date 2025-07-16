@@ -179,11 +179,7 @@ function App() {
           </form>
         </div>
       </div>
-      <footer className="footer-copyright">
-        © Copyright 2002 - 2025 Spider Design, Inc
-      </footer>
     </>
   );
 }
-
 export default App;
