@@ -92,45 +92,51 @@ function App() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name</label>
-        <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
-        {formErrors.firstName && <div className="error-message">{formErrors.firstName}</div>}
-      </div>
-      <div>
-        <label>Last Name</label>
-        <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
-        {formErrors.lastName && <div className="error-message">{formErrors.lastName}</div>}
-      </div>
-      <div>
-        <label>Phone Number</label>
+    <>
+      <h1 className="form-title">Spidr Interest Form</h1>
+      
+      <p className="required-note">* Required Field</p>
+
+      <form onSubmit={handleSubmit}>
         <div>
-          <div>
-            <Select options={countryOptions} value={formData.countryCode} onChange={(option) => handleChange(option, { name: 'countryCode' })} isSearchable
-            />
-          </div>
-          <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          <label>First Name <span style={{ color: '#fff' }}>*</span></label>
+          <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} />
+          {formErrors.firstName && <div className="error-message">{formErrors.firstName}</div>}
         </div>
-        {formErrors.phone && <div className="error-message">{formErrors.phone}</div>}
-      </div>
-      <div>
-        <label>Email Address</label>
-        <input type="text" name="email" value={formData.email} onChange={handleChange} />
-        {formErrors.email && <div className="error-message">{formErrors.email}</div>}
-      </div>
-      <div>
-        <label>Guess the air fryer’s cost (in USD)</label>
-        <input type="text" inputMode="numeric" name="guess" value={formData.guess} onChange={handleChange} />
-        {formErrors.guess && <div className="error-message">{formErrors.guess}</div>}
-      </div>
-      <div>
-        <label>Spidr PIN</label>
-        <input type="text" inputMode="numeric" name="pin" placeholder="####-####-####-####" maxLength={19} value={formData.pin} onChange={handleChange} />
-        {formErrors.pin && <div className="error-message">{formErrors.pin}</div>}
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+        <div>
+          <label>Last Name <span style={{ color: '#fff' }}>*</span></label>
+          <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} />
+          {formErrors.lastName && <div className="error-message">{formErrors.lastName}</div>}
+        </div>
+        <div>
+          <label>Phone Number <span style={{ color: '#fff' }}>*</span></label>
+          <div>
+            <div>
+              <Select options={countryOptions} value={formData.countryCode} onChange={(option) => handleChange(option, { name: 'countryCode' })} isSearchable
+              />
+            </div>
+            <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+          </div>
+          {formErrors.phone && <div className="error-message">{formErrors.phone}</div>}
+        </div>
+        <div>
+          <label>Email Address <span style={{ color: '#fff' }}>*</span></label>
+          <input type="text" name="email" value={formData.email} onChange={handleChange} />
+          {formErrors.email && <div className="error-message">{formErrors.email}</div>}
+        </div>
+        <div>
+          <label>Guess the air fryer’s cost (in USD) <span style={{ color: '#fff' }}>*</span></label>
+          <input type="text" inputMode="numeric" name="guess" value={formData.guess} onChange={handleChange} />
+          {formErrors.guess && <div className="error-message">{formErrors.guess}</div>}
+        </div>
+        <div>
+          <label>Spidr PIN <span style={{ color: '#fff' }}>*</span></label>
+          <input type="text" inputMode="numeric" name="pin" placeholder="####-####-####-####" maxLength={19} value={formData.pin} onChange={handleChange} />
+          {formErrors.pin && <div className="error-message">{formErrors.pin}</div>}
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 }
 

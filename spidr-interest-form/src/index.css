@@ -12,10 +12,15 @@ button {
   border-radius: 0 !important;
   transition: background 0.25s, border-color 0.25s;
 }
-button:hover, button:focus {
+button:hover {
   background: rgba(0,0,0,0.6);
   border-color: #56acbd !important;
   color: #56acbd;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
