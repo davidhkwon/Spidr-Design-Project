@@ -164,15 +164,15 @@ button[type="submit"] {
   }
   
   .required-note {
-    text-align: center;
+    align-self: flex-start;
+    text-align: left;
     width: 100%;
-    max-width: 100%;
   }
   
   form {
+    align-self: flex-start;
+    text-align: left;
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
   }
   
   form > div {
@@ -196,5 +196,11 @@ button[type="submit"] {
   .phone-input,
   .dollar-input-inside-container {
     max-width: 100%;
+  }
+
+  .error-message {
+    align-self: flex-start;
+    text-align: left;
+    width: 100%;
   }
 }
