@@ -53,7 +53,29 @@ function App() {
         formatted += digits.slice(i, i + 4);
       }
       newValue = formatted;
-    } else if (name === 'guess' || name === 'phone') {
+    } else if (name === 'guess') {
+      // Remove all characters except digits and a singular decimal point
+      let cleaned = value.replace(/[^\d.]/g, '');
+      // Ensure only one decimal point
+      const parts = cleaned.split('.');
+      if (parts.length > 2) {
+        cleaned = parts[0] + '.' + parts.slice(1).join('');
+      }
+      // Limit to 2 decimal places
+      if (cleaned.includes('.')) {
+        const [intPart, decPart] = cleaned.split('.');
+        cleaned = intPart + '.' + (decPart ? decPart.slice(0, 2) : '');
+      }
+      // Prevent multiple leading zeros (except for decimal numbers)
+      if (cleaned.startsWith('00') && !cleaned.startsWith('0.')) {
+        cleaned = cleaned.replace(/^0+/, '0');
+      }
+      // Prevent leading decimal point
+      if (cleaned.startsWith('.')) {
+        cleaned = '0' + cleaned;
+      }
+      newValue = cleaned;
+    } else if (name === 'phone') {
       newValue = value.replace(/\D/g, '');
     } else {
       // Remove leading spaces from text inputs
@@ -146,7 +168,7 @@ function App() {
                         isSearchable
                         styles={{
                           container: (provided) => ({ ...provided }),
-                          control: (provided) => ({ ...provided, color: 'black', minWidth: '0', fontSize: '0.9em' }),
+                          control: (provided) => ({ ...provided, color: 'black', minWidth: '0', fontSize: '0.9em', borderRadius: 0 }),
                           singleValue: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
                           input: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
                           option: (provided, state) => ({ 
@@ -181,12 +203,15 @@ function App() {
               {formErrors.email && <div className="error-message">{formErrors.email}</div>}
             </div>
             <div>
-              <label>Guess the air fryer’s cost (in USD) <span style={{ color: '#fff' }}>*</span></label>
-              <input type="text"
-                     inputMode="numeric"
-                     name="guess" value={formData.guess}
-                     onChange={handleChange} 
-              />
+              <label>Guess the Air Fryer’s Cost (in USD) <span style={{ color: '#fff' }}>*</span></label>
+              <div className="dollar-input-inside-container">
+                <span className="dollar-sign-inside">$</span>
+                <input type="text"
+                       inputMode="numeric"
+                       name="guess" value={formData.guess}
+                       onChange={handleChange}
+                />
+              </div>
               {formErrors.guess && <div className="error-message">{formErrors.guess}</div>}
             </div>
             <div>
