@@ -13,9 +13,6 @@
 .split-right {
   flex: 1 1 0;
   min-width: 0;
-  max-width: 450px;
-  padding: 2em 1.5em;
-  margin: 0 auto;
 }
 
 .split-left {
@@ -87,7 +84,7 @@ button[type="submit"] {
 
 /* Form Helper Components */
 .required-note {
-  margin: 0 auto 1em auto;
+  margin: 0 0 1em 0;
   max-width: 400px;
   text-align: left;
 }
@@ -144,10 +141,60 @@ button[type="submit"] {
   .split-container {
     flex-direction: column;
     gap: 0;
+    max-width: 100%;
+    padding: 0 1em;
   }
+  
   .split-left,
   .split-right {
     max-width: 100%;
-    padding: 1.5em 1em;
+    padding: 1.5em 0;
+  }
+
+  .split-left {
+    padding: 2em 1.5em;
+  }
+  
+  .split-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .required-note {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  form > div {
+    align-items: center;
+    width: 100%;
+  }
+  
+  label {
+    text-align: left;
+    width: 100%;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"] {
+    max-width: 100%;
+  }
+  
+  .country-select,
+  .phone-input,
+  .dollar-input-inside-container {
+    max-width: 100%;
   }
 }
