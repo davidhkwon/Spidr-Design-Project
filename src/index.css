@@ -49,9 +49,9 @@ button {
 }
 
 button:hover {
-  background: transparent;
-  border-color: #56acbd !important;
-  color: #56acbd;
+  background: rgba(0,0,0,.25);
+  border-color: #4693A3 !important;
+  color: #4693A3;
 }
 
 /* Form Input Focus Styles */
