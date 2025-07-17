@@ -184,7 +184,7 @@ function App() {
                         }}
                 />
               </div>
-              <input type="text"
+              <input type="tel"
                      name="phone"
                      value={formData.phone}
                      onChange={handleChange}
