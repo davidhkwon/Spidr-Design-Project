@@ -1,6 +1,8 @@
-# Spidr Design Interest Form
+# Spidr Design Project
 
-A React application for collecting user interest in Spidr Design's new air fryer.
+A React-based interest form for Spidr Design.
+
+<!-- Deployment trigger -->
 
 ## Technology
 
