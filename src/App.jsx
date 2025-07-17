@@ -151,7 +151,6 @@ function App() {
                           input: (provided) => ({ ...provided, color: 'black', fontSize: '0.9em' }),
                           option: (provided, state) => ({ 
                             ...provided, 
-                            color: 'black', 
                             fontSize: '0.9em',
                             backgroundColor: state.isFocused ? '#56acbd' : state.isSelected ? '#56acbd' : 'white',
                             color: state.isFocused || state.isSelected ? 'white' : 'black',
